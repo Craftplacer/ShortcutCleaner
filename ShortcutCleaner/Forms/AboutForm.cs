@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
@@ -15,10 +16,14 @@ namespace ShortcutCleaner.Forms
             this.Text = string.Format("About {0}", AssemblyTitle);
             this.labelProductName.Text = AssemblyProduct;
             this.labelVersion.Text = string.Format("Version {0}", AssemblyVersion);
-            this.labelCopyright.Text = AssemblyCopyright;
-            this.labelCompanyName.Text = AssemblyCompany;
             this.textBoxDescription.Text = AssemblyDescription;
             this.logoPictureBox.Image = GetLogoBitmap();
+
+            this.labelCopyright.Text = AssemblyCopyright;
+            AddCopyrightLinks();
+
+            var githubLink = this.linkLabelGitHub.Links[0];
+            githubLink.LinkData = githubLink.Name;
         }
 
         #region Assembly Attribute Accessors
@@ -107,23 +112,18 @@ namespace ShortcutCleaner.Forms
                 }
             }
         }
-
-        public string AssemblyCompany
-        {
-            get
-            {
-                var companyAttribute = FetchAssemblyAttribute<AssemblyCompanyAttribute>();
-                if (companyAttribute == null)
-                {
-                    return string.Empty;
-                }
-                else
-                {
-                    return companyAttribute.Company;
-                }
-            }
-        }
         #endregion
+
+        private void AddCopyrightLinks()
+        {
+            const string copyrightHolder = "Craftplacer";
+            const string copyrightHolderWebsite = "https://craftplacer.moe";
+
+            var copyrightHolderIndex = this.labelCopyright.Text.IndexOf(copyrightHolder);
+
+            this.labelCopyright.Links.Clear();
+            this.labelCopyright.Links.Add(copyrightHolderIndex, copyrightHolder.Length, copyrightHolderWebsite);
+        }
 
         private Bitmap GetLogoBitmap()
         {
@@ -139,6 +139,14 @@ namespace ShortcutCleaner.Forms
             }
 
             return bitmap;
+        }
+
+        private void LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (e.Link.LinkData is string url)
+            {
+                Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
+            }
         }
     }
 }

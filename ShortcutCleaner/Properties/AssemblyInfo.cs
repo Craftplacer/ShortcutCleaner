@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Shortcut Cleaner")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Shortcut Cleaner is a Windows application that removes redundant shortcuts and tidies up the start menu.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Craftplacer")]
 [assembly: AssemblyProduct("Shortcut Cleaner")]

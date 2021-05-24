@@ -12,6 +12,7 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -24,7 +25,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -89,27 +89,39 @@
       <DependentUpon>AboutForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers.cs" />
-    <Compile Include="Pages\DeletionPage.cs" />
+    <Compile Include="Pages\DeletionPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Pages\DeletionPage.Designer.cs">
       <DependentUpon>DeletionPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\ExclusionPage.cs" />
+    <Compile Include="Pages\ExclusionPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Pages\ExclusionPage.Designer.cs">
       <DependentUpon>ExclusionPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\FinishPage.cs" />
+    <Compile Include="Pages\FinishPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Pages\FinishPage.Designer.cs">
       <DependentUpon>FinishPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\SelectionPage.cs" />
+    <Compile Include="Pages\SelectionPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Pages\SelectionPage.Designer.cs">
       <DependentUpon>SelectionPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\FolderPage.cs" />
+    <Compile Include="Pages\FolderPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Pages\FolderPage.Designer.cs">
       <DependentUpon>FolderPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Pages\StartPage.cs" />
+    <Compile Include="Pages\StartPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Pages\StartPage.Designer.cs">
       <DependentUpon>StartPage.cs</DependentUpon>
     </Compile>
