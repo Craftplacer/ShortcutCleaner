@@ -1,4 +1,4 @@
-# ShortcutCleaner
+# ![](https://raw.githubusercontent.com/Craftplacer/ShortcutCleaner/master/ShortcutCleaner/Resources/Icon.ico) Shortcut Cleaner
 
 Shortcut Cleaner is a Windows application that removes redundant shortcuts and tidies up the start menu.  
 
