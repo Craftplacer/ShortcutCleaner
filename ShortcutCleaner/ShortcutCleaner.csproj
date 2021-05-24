@@ -184,12 +184,12 @@
     <None Include="Resources\WebDocument.png" />
     <None Include="Resources\Refresh.png" />
     <None Include="Resources\AboutLogo.png" />
-    <Content Include="Resources\WizardHeader.png" />
-    <Content Include="Resources\WizardSidebar.png" />
+    <None Include="Resources\WizardHeader.png" />
+    <None Include="Resources\WizardSidebar.png" />
     <None Include="Resources\FolderPrograms.png" />
     <None Include="Resources\FolderArrow.png" />
-    <Content Include="Resources\Icon.ico" />
-    <Content Include="Resources\Star.png" />
+    <None Include="Resources\Icon.ico" />
+    <None Include="Resources\Star.png" />
     <None Include="Resources\Warning.png" />
   </ItemGroup>
   <ItemGroup>
