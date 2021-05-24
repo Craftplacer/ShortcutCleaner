@@ -1,5 +1,7 @@
 # ShortcutCleaner
- 
+
+Shortcut Cleaner is a Windows application that removes redundant shortcuts and tidies up the start menu.  
+
 ## Screenshots
 
 | Introduction page | Selection page |
