@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShortcutCleaner", "ShortcutCleaner\ShortcutCleaner.csproj", "{293E7308-E814-4FAE-8C42-09985EE05A2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Craftplacer.ClassicSuite.Wizards", "..\Craftplacer.ClassicSuite\Craftplacer.ClassicSuite.Wizards\Craftplacer.ClassicSuite.Wizards.csproj", "{BC27A903-7E1A-485D-88D6-FB0AF399C18E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{293E7308-E814-4FAE-8C42-09985EE05A2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{293E7308-E814-4FAE-8C42-09985EE05A2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{293E7308-E814-4FAE-8C42-09985EE05A2A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BC27A903-7E1A-485D-88D6-FB0AF399C18E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BC27A903-7E1A-485D-88D6-FB0AF399C18E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BC27A903-7E1A-485D-88D6-FB0AF399C18E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BC27A903-7E1A-485D-88D6-FB0AF399C18E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
