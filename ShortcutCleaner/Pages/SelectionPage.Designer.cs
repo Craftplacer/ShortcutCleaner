@@ -33,8 +33,6 @@ namespace ShortcutCleaner.Pages
         {
             this.components = new System.ComponentModel.Container();
             this.backgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.errorPictureBox = new System.Windows.Forms.PictureBox();
-            this.errorLabel = new System.Windows.Forms.Label();
             this.listView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -42,7 +40,6 @@ namespace ShortcutCleaner.Pages
             this.titleLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.descriptionLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.errorPictureBox)).BeginInit();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,26 +49,6 @@ namespace ShortcutCleaner.Pages
             this.backgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
             this.backgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorker_ProgressChanged);
             this.backgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_RunWorkerCompleted);
-            // 
-            // errorPictureBox
-            // 
-            this.errorPictureBox.Image = global::ShortcutCleaner.Properties.Resources.Warning;
-            this.errorPictureBox.Location = new System.Drawing.Point(328, 208);
-            this.errorPictureBox.Name = "errorPictureBox";
-            this.errorPictureBox.Size = new System.Drawing.Size(16, 16);
-            this.errorPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.errorPictureBox.TabIndex = 11;
-            this.errorPictureBox.TabStop = false;
-            this.errorPictureBox.Visible = false;
-            // 
-            // errorLabel
-            // 
-            this.errorLabel.Location = new System.Drawing.Point(352, 208);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(136, 40);
-            this.errorLabel.TabIndex = 12;
-            this.errorLabel.Text = "A problem occured while calculating one of the item count estimates.";
-            this.errorLabel.Visible = false;
             // 
             // listView
             // 
@@ -127,7 +104,7 @@ namespace ShortcutCleaner.Pages
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(328, 8);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(160, 192);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(160, 240);
             this.flowLayoutPanel1.TabIndex = 15;
             // 
             // descriptionLabel
@@ -146,8 +123,6 @@ namespace ShortcutCleaner.Pages
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.listView);
-            this.Controls.Add(this.errorLabel);
-            this.Controls.Add(this.errorPictureBox);
             this.DoubleBuffered = true;
             this.Name = "SelectionPage";
             this.PageParts = Craftplacer.ClassicSuite.Wizards.Enums.PagePart.Header;
@@ -156,18 +131,14 @@ namespace ShortcutCleaner.Pages
             this.PageEnter += new System.EventHandler<System.EventArgs>(this.FirstPage_EnterPage);
             this.PageLeave += new System.EventHandler<System.EventArgs>(this.FirstPage_LeavePage);
             this.Load += new System.EventHandler(this.FirstPage_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.errorPictureBox)).EndInit();
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.ComponentModel.BackgroundWorker backgroundWorker;
-        private System.Windows.Forms.PictureBox errorPictureBox;
-        private System.Windows.Forms.Label errorLabel;
         private System.Windows.Forms.ListView listView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;

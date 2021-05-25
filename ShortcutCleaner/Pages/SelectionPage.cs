@@ -71,8 +71,7 @@ namespace ShortcutCleaner.Pages
         {
             if (e.Error != null)
             {
-                errorPictureBox.Visible = true;
-                errorLabel.Visible = true;
+                MessageBox.Show($"A problem occured while calculating the item estimates.\n\nThis may indicate a problem with the program. Further details are shown below:\n\n{e.Error}", "Shortcut Cleaner", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
