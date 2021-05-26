@@ -31,11 +31,12 @@ namespace ShortcutCleaner.Filters
             return extensions.Any(e => extension.Equals(e, StringComparison.OrdinalIgnoreCase));
         }
 
-        protected bool ContainsWords(string filePath, params string[]words)
+        protected bool ContainsWords(string filePath, params string[] words)
         {
             var fileName = Path.GetFileNameWithoutExtension(filePath).ToLowerInvariant();
+            var fileNameWords = fileName.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
 
-            return words.Any((w) => fileName.Contains(w.ToLowerInvariant()));
+            return words.Any((w) => fileNameWords.Contains(w.ToLowerInvariant()));
         }
     }
 }
