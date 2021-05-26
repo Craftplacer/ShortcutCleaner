@@ -72,6 +72,8 @@ namespace ShortcutCleaner.Pages
 
                 ResizeColumns();
                 listView.EndUpdate();
+
+                viewSelectedButton.Enabled = IsDetectedItemsButtonEnabled();
             }
         }
 
@@ -176,6 +178,23 @@ namespace ShortcutCleaner.Pages
             listView.Columns[0].Width = -2;
         }
 
+
+        private bool IsDetectedItemsButtonEnabled()
+        {
+            if (listView.SelectedItems.Count == 0) return false;
+
+            var item = listView.SelectedItems[0];
+            if (!(item.Tag is string filterId)) return false;
+
+            if (paths == null) return false;
+            if (!paths.ContainsKey(filterId)) return false;
+
+            var filterPaths = paths[filterId];
+            if (filterPaths == null) return false;
+
+            return filterPaths.Any();
+        }
+
         private void listView_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (listView.SelectedItems.Count == 0)
@@ -183,15 +202,12 @@ namespace ShortcutCleaner.Pages
                 return;
             }
 
+            viewSelectedButton.Enabled = IsDetectedItemsButtonEnabled();
+
             var item = listView.SelectedItems[0];
 
             if (item.Tag is string filterId)
             {
-                if (paths != null)
-                {
-                    viewSelectedButton.Enabled = paths[filterId]?.Any() ?? false;
-                }
-
                 var filter = Program.AvailableFilters.First((f) => f.Id == filterId);
 
                 titleLabel.Text = filter.Name;
