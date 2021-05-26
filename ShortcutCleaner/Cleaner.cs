@@ -21,7 +21,7 @@ namespace ShortcutCleaner
 
             foreach (var originalPath in Directory.GetFiles(path))
             {
-                var selectedFilters = Program.AvailableFilters.Where((f) => settings.EnabledFilters.Contains(f.GetType().FullName);
+                var selectedFilters = Program.AvailableFilters.Where((f) => settings.EnabledFilters.Contains(f.Id));
                 foreach (var filter in selectedFilters)
                 {
                     var resolvedPath = ResolvePath(originalPath);

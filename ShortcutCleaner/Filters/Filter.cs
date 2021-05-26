@@ -17,6 +17,8 @@ namespace ShortcutCleaner.Filters
 
         public virtual bool SelectedByDefault => true;
 
+        public string Id => GetType().FullName;
+
         /// <summary>
         /// Checks whether this filter matches with this file.
         /// </summary>

@@ -27,7 +27,7 @@ namespace ShortcutCleaner.Pages
 
             foreach (var filter in Program.AvailableFilters)
             {
-                paths[filter.GetType().FullName] = GetPathsForFilter(filter);
+                paths[filter.Id] = GetPathsForFilter(filter);
                 backgroundWorker.ReportProgress(0, paths);
             }
 
@@ -111,7 +111,7 @@ namespace ShortcutCleaner.Pages
             {
                 var group = GetGroup(filter.Category);
 
-                imageList.Images.Add(filter.GetType().FullName, filter.Icon);
+                imageList.Images.Add(filter.Id, filter.Icon);
 
                 var lvi = MakeListViewItem(filter, group);
                 listView.Items.Add(lvi);
@@ -131,7 +131,7 @@ namespace ShortcutCleaner.Pages
             {
                 EnabledFilters = new List<string>(1)
                 {
-                    filter.GetType().FullName,
+                    filter.Id,
                 }
             };
 
@@ -162,7 +162,7 @@ namespace ShortcutCleaner.Pages
         private ListViewItem MakeListViewItem(Filter filter, ListViewGroup group)
         {
             var labels = new string[] { filter.Name, "Calculating..." };
-            return new ListViewItem(labels, filter.GetType().FullName)
+            return new ListViewItem(labels, filter.Id)
             {
                 Tag = filter.GetType().ToString(),
                 Group = group,
@@ -192,7 +192,7 @@ namespace ShortcutCleaner.Pages
                     viewSelectedButton.Enabled = paths[filterId]?.Any() ?? false;
                 }
 
-                var filter = Program.AvailableFilters.First((f) => f.GetType().FullName == filterId);
+                var filter = Program.AvailableFilters.First((f) => f.Id == filterId);
 
                 titleLabel.Text = filter.Name;
 
