@@ -32,7 +32,7 @@ namespace ShortcutCleaner.Pages
                 {
                     Text = path.Substring(programsPath.Length),
                     ImageKey = path.ToLowerInvariant(),
-                    StateImageKey = path.ToLowerInvariant(),
+                    SelectedImageKey = path.ToLowerInvariant(),
                 };
 
                 treeView.Nodes.Add(treeNode);
