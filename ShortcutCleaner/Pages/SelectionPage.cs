@@ -1,6 +1,7 @@
 ﻿using Craftplacer.ClassicSuite.Wizards.Pages;
 
 using ShortcutCleaner.Filters;
+using ShortcutCleaner.Forms;
 
 using System;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ namespace ShortcutCleaner.Pages
     public partial class SelectionPage : WizardPage
     {
         private bool fetchedCounts;
+        private Dictionary<string, IEnumerable<string>> paths;
 
         public SelectionPage()
         {
@@ -21,13 +23,12 @@ namespace ShortcutCleaner.Pages
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            var counts = new Dictionary<string, int>();
-            var filters = Helpers.GetFilters();
+            var paths = new Dictionary<string, IEnumerable<string>>();
 
-            foreach (var filter in filters)
+            foreach (var filter in Program.AvailableFilters)
             {
-                counts[filter.GetType().FullName] = GetCountForCategory(filter);
-                backgroundWorker.ReportProgress(0, counts);
+                paths[filter.GetType().FullName] = GetPathsForFilter(filter);
+                backgroundWorker.ReportProgress(0, paths);
             }
 
             fetchedCounts = true;
@@ -37,33 +38,40 @@ namespace ShortcutCleaner.Pages
         {
             lock (e.UserState)
             {
-                if (e.UserState is Dictionary<string, int> counts)
+                if (!(e.UserState is Dictionary<string, IEnumerable<string>> newPaths))
                 {
-                    listView.BeginUpdate();
-
-                    foreach (var kv in counts)
-                    {
-                        foreach (ListViewItem lvi in listView.Items)
-                        {
-                            if (lvi.Tag is Filter filter && filter.GetType().FullName == kv.Key)
-                            {
-                                if (kv.Value == 1)
-                                {
-                                    lvi.SubItems[1].Text = kv.Value + " item found";
-                                }
-                                else
-                                {
-                                    lvi.SubItems[1].Text = kv.Value + " items found";
-                                }
-                                
-                                break;
-                            }
-                        }
-                    }
-
-                    ResizeColumns();
-                    listView.EndUpdate();
+                    return;
                 }
+
+                paths = newPaths;
+
+                listView.BeginUpdate();
+
+                foreach (var kv in paths)
+                {
+                    foreach (ListViewItem lvi in listView.Items)
+                    {
+                        if (!(lvi.Tag is string filterId) || filterId != kv.Key)
+                        {
+                            continue;
+                        }
+
+                        var count = kv.Value.Count();
+                        if (count == 1)
+                        {
+                            lvi.SubItems[1].Text = count + " item found";
+                        }
+                        else
+                        {
+                            lvi.SubItems[1].Text = count + " items found";
+                        }
+
+                        break;
+                    }
+                }
+
+                ResizeColumns();
+                listView.EndUpdate();
             }
         }
 
@@ -89,10 +97,9 @@ namespace ShortcutCleaner.Pages
             {
                 foreach (ListViewItem item in listView.Items)
                 {
-                    if (item.Checked && item.Tag is Filter filter)
+                    if (item.Checked && item.Tag is string filterId)
                     {
-                        var filterName = filter.GetType().FullName;
-                        Program.TaskSettings.EnabledFilters.Add(filterName);
+                        Program.TaskSettings.EnabledFilters.Add(filterId);
                     }
                 }
             }
@@ -110,10 +117,15 @@ namespace ShortcutCleaner.Pages
                 listView.Items.Add(lvi);
             }
 
+            if (listView.Items.Count != 0)
+            {
+                listView.Items[0].Selected = true;
+            }
+
             ResizeColumns();
         }
 
-        private int GetCountForCategory(Filter filter)
+        private IEnumerable<string> GetPathsForFilter(Filter filter)
         {
             var settings = new TaskSettings()
             {
@@ -124,8 +136,7 @@ namespace ShortcutCleaner.Pages
             };
 
             var path = Helpers.GetProgramsPath(Program.TaskSettings.FolderLocation == Enums.FolderLocation.AllUsers);
-            var paths = Cleaner.CollectPaths(path, settings);
-            return paths.Count();
+            return Cleaner.CollectPaths(path, settings);
         }
 
         private ListViewGroup GetGroup(FilterCategory filterCategory)
@@ -153,7 +164,7 @@ namespace ShortcutCleaner.Pages
             var labels = new string[] { filter.Name, "Calculating..." };
             return new ListViewItem(labels, filter.GetType().FullName)
             {
-                Tag = filter,
+                Tag = filter.GetType().ToString(),
                 Group = group,
                 Checked = filter.SelectedByDefault,
             };
@@ -174,8 +185,15 @@ namespace ShortcutCleaner.Pages
 
             var item = listView.SelectedItems[0];
 
-            if (item.Tag is Filter filter)
+            if (item.Tag is string filterId)
             {
+                if (paths != null)
+                {
+                    viewSelectedButton.Enabled = paths[filterId]?.Any() ?? false;
+                }
+
+                var filter = Program.AvailableFilters.First((f) => f.GetType().FullName == filterId);
+
                 titleLabel.Text = filter.Name;
 
                 if (string.IsNullOrWhiteSpace(filter.Description))
@@ -185,6 +203,20 @@ namespace ShortcutCleaner.Pages
                 else
                 {
                     descriptionLabel.Text = filter.Description;
+                }
+            }
+        }
+
+        private void ViewSelectedButton_Click(object sender, EventArgs e)
+        {
+            var item = listView.SelectedItems[0];
+            if (item.Tag is string filterId)
+            {
+                var filterPaths = paths[filterId];
+
+                using (var itemsForm = new ItemsForm(filterPaths))
+                {
+                    itemsForm.ShowDialog(this);
                 }
             }
         }

@@ -40,6 +40,7 @@ namespace ShortcutCleaner.Pages
             this.titleLabel = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.descriptionLabel = new System.Windows.Forms.Label();
+            this.viewSelectedButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,7 +105,7 @@ namespace ShortcutCleaner.Pages
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(328, 8);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(160, 240);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(160, 208);
             this.flowLayoutPanel1.TabIndex = 15;
             // 
             // descriptionLabel
@@ -117,10 +118,21 @@ namespace ShortcutCleaner.Pages
             this.descriptionLabel.TabIndex = 15;
             this.descriptionLabel.Text = "Description";
             // 
+            // viewSelectedButton
+            // 
+            this.viewSelectedButton.Location = new System.Drawing.Point(328, 224);
+            this.viewSelectedButton.Name = "viewSelectedButton";
+            this.viewSelectedButton.Size = new System.Drawing.Size(163, 23);
+            this.viewSelectedButton.TabIndex = 16;
+            this.viewSelectedButton.Text = "&View detected items";
+            this.viewSelectedButton.UseVisualStyleBackColor = true;
+            this.viewSelectedButton.Click += new System.EventHandler(this.ViewSelectedButton_Click);
+            // 
             // SelectionPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.viewSelectedButton);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.listView);
             this.DoubleBuffered = true;
@@ -146,5 +158,6 @@ namespace ShortcutCleaner.Pages
         private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label descriptionLabel;
+        private System.Windows.Forms.Button viewSelectedButton;
     }
 }
