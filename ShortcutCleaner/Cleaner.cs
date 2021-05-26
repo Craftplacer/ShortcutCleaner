@@ -9,13 +9,6 @@ namespace ShortcutCleaner
 {
     public class Cleaner
     {
-        private readonly static IEnumerable<Filter> filters;
-
-        static Cleaner()
-        {
-            filters = Helpers.GetFilters();
-        }
-
         public static IEnumerable<string> CollectPaths(string path, TaskSettings settings)
         {
             var paths = new List<string>();
@@ -28,11 +21,10 @@ namespace ShortcutCleaner
 
             foreach (var originalPath in Directory.GetFiles(path))
             {
-                foreach (var filterName in settings.EnabledFilters)
+                var selectedFilters = Program.AvailableFilters.Where((f) => settings.EnabledFilters.Contains(f.GetType().FullName);
+                foreach (var filter in selectedFilters)
                 {
-                    var filter = filters.FirstOrDefault((f) => f.GetType().FullName == filterName);
                     var resolvedPath = ResolvePath(originalPath);
-
                     if (filter.IsMatch(originalPath, resolvedPath))
                     {
                         paths.Add(originalPath);

@@ -1,6 +1,7 @@
 ﻿using Craftplacer.ClassicSuite.Wizards.Forms;
 using Craftplacer.ClassicSuite.Wizards.Pages;
 
+using ShortcutCleaner.Filters;
 using ShortcutCleaner.Pages;
 
 using System;
@@ -24,6 +25,7 @@ namespace ShortcutCleaner
         public static List<string> DeletedPaths = new List<string>();
         public static TaskSettings TaskSettings { get; internal set; } = new TaskSettings();
 
+        public static Filter[] AvailableFilters { get; private set; }
         public static bool SkipStartPage { get; set; }
 
         /// <summary>
@@ -33,8 +35,8 @@ namespace ShortcutCleaner
         private static void Main(string[] args)
         {
             Assembly = Assembly.GetExecutingAssembly();
-
             SkipStartPage = args.Contains("-cau");
+            AvailableFilters = Helpers.GetFilters().ToArray();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
